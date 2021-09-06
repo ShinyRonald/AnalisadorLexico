@@ -1,0 +1,23 @@
+IDENTIFICADORES
+       (a..z)(A..Z|0..9 |a..z) 
+NUMEROS
+       (0..9)+
+PONTUACAO
+       ;
+OP_RELACIONAIS
+       (> | >= | < | <= | == | !=)
+OP_ATRIBUIÇÃO
+       =
+
+       observações
+a..z -> intervalo da letra 'a' até a letra 'z'
+*    -> 0 ou mais repetições
++    -> 1 ou mais repetições
+
+Estados: 
+0 \n \t \b -> 0
+0 (a..z) -> 1 (a..z)(A..Z)(0..9) -> 2 TK_ID <- BACK
+0 (0..9) -> 3 (0..9) -> 4 TK_NUM <- BACK
+0 ( = ) -> 5 -> outro -> 6 TK_AT <- BACK
+0 ( = ) -> 5 -> = -> 7 TK_OP_REL
+       
